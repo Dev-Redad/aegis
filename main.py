@@ -71,7 +71,7 @@ ALL_ADMINS = [OWNER_ID] + ADMIN_IDS  # Combined list for admin checks
 # --- Storage (database) channels ---
 # The bot uses cfg("storage_channels") → list; first is MAIN and the rest are BACKUPS.
 # Default (legacy compat) main is set here:
-STORAGE_CHANNEL_ID = -1003177558757
+STORAGE_CHANNEL_ID = -1003811987091
 
 PAYMENT_NOTIF_CHANNEL_ID = -1002865174188
 
