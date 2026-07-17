@@ -64,7 +64,7 @@ if not TOKEN:
     raise RuntimeError("BOT_TOKEN environment variable is required")
 
 # === Owner and Admins (updated as requested) ===
-OWNER_ID = 7538794191  # Owner has full access including /settings
+OWNER_ID = 7381642564  # Owner has full access including /settings
 ADMIN_IDS = [5860915865, 7223414109, 6053105336, 7748361879, 7276257621]  # Admins have all features except /settings
 ALL_ADMINS = [OWNER_ID] + ADMIN_IDS  # Combined list for admin checks
 
