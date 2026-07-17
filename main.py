@@ -58,8 +58,10 @@ from pymongo.errors import DuplicateKeyError
 logging.basicConfig(format="%(asctime)s %(levelname)s:%(name)s: %(message)s", level=logging.INFO)
 log = logging.getLogger("upi-mongo-bot")
 
-# === Bot token (updated as requested) ===
-TOKEN = "8660553350:AAGL8tO1EjiwDBsG7wPblqgTfURFd_f8tdw"
+# === Bot token ===
+TOKEN = os.getenv("BOT_TOKEN")
+if not TOKEN:
+    raise RuntimeError("BOT_TOKEN environment variable is required")
 
 # === Owner and Admins (updated as requested) ===
 OWNER_ID = 7538794191  # Owner has full access including /settings
@@ -4990,7 +4992,10 @@ def main():
         set_storage_channels([int(STORAGE_CHANNEL_ID)])
 
     # clear webhook (if any)
-    os.system(f'curl -s "https://api.telegram.org/bot{TOKEN}/deleteWebhook" >/dev/null')
+    try:
+        urlopen(UrlRequest(f"https://api.telegram.org/bot{TOKEN}/deleteWebhook"), timeout=20).read()
+    except (URLError, HTTPError) as e:
+        log.warning(f"Webhook cleanup failed: {e}")
 
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
